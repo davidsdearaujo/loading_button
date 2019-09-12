@@ -1,0 +1,18 @@
+name: loading_button
+description: Loading button with simple implementation
+version: 0.0.1
+author: Flutterando Team <david@flutterando.com.br>
+homepage: https://github.com/davidsdearaujo/loading_button
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
