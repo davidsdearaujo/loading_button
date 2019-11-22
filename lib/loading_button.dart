@@ -51,6 +51,7 @@ class _LoadingButtonState extends State<LoadingButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: widget.isLoading ? null : widget.onPressed,
         child: AnimatedContainer(
