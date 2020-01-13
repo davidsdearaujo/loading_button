@@ -30,12 +30,19 @@ class _LoadingButtonState extends State<LoadingButton> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    buildDecoration();
+    buildLoadingWidget();
+  }
+
+  void buildDecoration() {
     decoration = widget.decoration ??
         BoxDecoration(
           color: widget.backgroundColor ?? Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(5),
         );
+  }
 
+  void buildLoadingWidget() {
     loadingWidget = loadingWidget ??
         SizedBox(
           width: 25,
@@ -50,19 +57,15 @@ class _LoadingButtonState extends State<LoadingButton> {
 
   @override
   Widget build(BuildContext context) {
+    buildDecoration();
     return Material(
-      color: Colors.transparent,
       child: InkWell(
         onTap: widget.isLoading ? null : widget.onPressed,
         child: AnimatedContainer(
-          padding: widget.isLoading
-              ? EdgeInsets.all(10)
-              : EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          padding: widget.isLoading ? EdgeInsets.all(10) : EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           duration: Duration(milliseconds: 200),
           curve: Curves.easeInOut,
-          decoration: widget.isLoading
-              ? decoration.copyWith(borderRadius: BorderRadius.circular(100))
-              : decoration,
+          decoration: widget.isLoading ? decoration.copyWith(borderRadius: BorderRadius.circular(100)) : decoration,
           child: widget.isLoading ? loadingWidget : widget.child,
         ),
       ),
