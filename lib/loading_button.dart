@@ -40,9 +40,9 @@ class _LoadingButtonState extends State<LoadingButton> {
     final bgColor = widget.backgroundColor ?? Theme.of(context).primaryColor;
 
     textDefaultColor =
-        (ThemeData.estimateBrightnessForColor(bgColor) == Brightness.light)
+        (ThemeData.estimateBrightnessForColor(bgColor) == Brightness.dark)
             ? Colors.white
-            : Theme.of(context).primaryColor;
+            : Colors.black;
 
     decoration = widget.decoration ??
         BoxDecoration(
@@ -67,9 +67,9 @@ class _LoadingButtonState extends State<LoadingButton> {
   @override
   Widget build(BuildContext context) {
     buildDecoration();
-    return DefaultTextStyle(
-      style: TextStyle(color: textDefaultColor),
-      child: Material(
+    return Material(
+      child: DefaultTextStyle(
+        style: TextStyle(color: textDefaultColor),
         child: InkWell(
           onTap: widget.isLoading ? null : widget.onPressed,
           child: AnimatedContainer(

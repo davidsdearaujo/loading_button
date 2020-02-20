@@ -1,3 +1,7 @@
+## [0.0.3+1] - 2020.02.20
+* Text color based on background color fix
+
+
 ## [0.0.3] - 2020.02.20
 
 * Update the background on demand
