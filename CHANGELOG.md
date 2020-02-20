@@ -1,3 +1,9 @@
+## [0.0.3] - 2020.02.20
+
+* Update the background on demand
+* Text color based on background color
+
+
 ## [0.0.2] - 2019.11.21
 
 * Background transparency bug fix
