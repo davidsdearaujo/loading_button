@@ -27,6 +27,8 @@ class LoadingButton extends StatefulWidget {
 class _LoadingButtonState extends State<LoadingButton> {
   BoxDecoration decoration;
   Widget loadingWidget;
+  Color textDefaultColor;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -35,9 +37,16 @@ class _LoadingButtonState extends State<LoadingButton> {
   }
 
   void buildDecoration() {
+    final bgColor = widget.backgroundColor ?? Theme.of(context).primaryColor;
+
+    textDefaultColor =
+        (ThemeData.estimateBrightnessForColor(bgColor) == Brightness.light)
+            ? Colors.white
+            : Theme.of(context).primaryColor;
+
     decoration = widget.decoration ??
         BoxDecoration(
-          color: widget.backgroundColor ?? Theme.of(context).primaryColor,
+          color: bgColor,
           borderRadius: BorderRadius.circular(5),
         );
   }
@@ -49,7 +58,7 @@ class _LoadingButtonState extends State<LoadingButton> {
           height: 25,
           child: Center(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(textDefaultColor),
             ),
           ),
         );
@@ -58,15 +67,22 @@ class _LoadingButtonState extends State<LoadingButton> {
   @override
   Widget build(BuildContext context) {
     buildDecoration();
-    return Material(
-      child: InkWell(
-        onTap: widget.isLoading ? null : widget.onPressed,
-        child: AnimatedContainer(
-          padding: widget.isLoading ? EdgeInsets.all(10) : EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          duration: Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          decoration: widget.isLoading ? decoration.copyWith(borderRadius: BorderRadius.circular(100)) : decoration,
-          child: widget.isLoading ? loadingWidget : widget.child,
+    return DefaultTextStyle(
+      style: TextStyle(color: textDefaultColor),
+      child: Material(
+        child: InkWell(
+          onTap: widget.isLoading ? null : widget.onPressed,
+          child: AnimatedContainer(
+            padding: widget.isLoading
+                ? EdgeInsets.all(10)
+                : EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            decoration: widget.isLoading
+                ? decoration.copyWith(borderRadius: BorderRadius.circular(100))
+                : decoration,
+            child: widget.isLoading ? loadingWidget : widget.child,
+          ),
         ),
       ),
     );
