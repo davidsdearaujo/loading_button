@@ -3,15 +3,15 @@ library loading_button;
 import 'package:flutter/material.dart';
 
 class LoadingButton extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
   final bool isLoading;
-  final void Function() onPressed;
-  final Color backgroundColor;
-  final BoxDecoration decoration;
-  final Widget loadingWidget;
+  final void Function()? onPressed;
+  final Color? backgroundColor;
+  final BoxDecoration? decoration;
+  final Widget? loadingWidget;
 
   const LoadingButton({
-    Key key,
+    Key? key,
     this.child,
     this.onPressed,
     this.isLoading = false,
@@ -25,9 +25,9 @@ class LoadingButton extends StatefulWidget {
 }
 
 class _LoadingButtonState extends State<LoadingButton> {
-  BoxDecoration decoration;
-  Widget loadingWidget;
-  Color textDefaultColor;
+  BoxDecoration? decoration;
+  Widget? loadingWidget;
+  Color? textDefaultColor;
 
   @override
   void didChangeDependencies() {
@@ -58,7 +58,7 @@ class _LoadingButtonState extends State<LoadingButton> {
           height: 25,
           child: Center(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(textDefaultColor),
+              valueColor: AlwaysStoppedAnimation<Color?>(textDefaultColor),
             ),
           ),
         );
@@ -79,7 +79,7 @@ class _LoadingButtonState extends State<LoadingButton> {
             duration: Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             decoration: widget.isLoading
-                ? decoration.copyWith(borderRadius: BorderRadius.circular(100))
+                ? decoration!.copyWith(borderRadius: BorderRadius.circular(100))
                 : decoration,
             child: widget.isLoading ? loadingWidget : widget.child,
           ),
